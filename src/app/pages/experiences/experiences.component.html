@@ -1,0 +1,28 @@
+<section class="section section--experiences page-main">
+  <div class="section__head section__head--split">
+    <div>
+      <p class="eyebrow">{{ 'exp.company.eyebrow' | t }}</p>
+      <h2 class="section__title">{{ 'exp.company.title' | t }}</h2>
+    </div>
+    <p class="section__subtitle section__subtitle--right">{{ 'exp.company.subtitle' | t }}</p>
+  </div>
+
+  <div class="grid grid--experiences">
+    @for (p of servicePillars; track p.key) {
+      <article class="tile">
+        <div class="tile__image">
+          <img [src]="p.image" [alt]="expAlt(p.key)" width="600" height="400" loading="lazy" />
+        </div>
+        <div class="tile__body">
+          <span class="tile__icon" aria-hidden="true">{{ p.icon }}</span>
+          <h3 class="tile__title">{{ ('exp.pillar.' + p.key + '.title') | t }}</h3>
+          <p class="tile__text">{{ ('exp.pillar.' + p.key + '.text') | t }}</p>
+          <a class="link-arrow" routerLink="/rates">{{ 'exp.company.link' | t }}</a>
+        </div>
+      </article>
+    }
+  </div>
+  <div class="experiences-grid-trailer">
+    <p class="logistics-note">{{ 'exp.logisticsNote' | t }}</p>
+  </div>
+</section>

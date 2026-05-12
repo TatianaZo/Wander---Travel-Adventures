@@ -1,0 +1,11 @@
+@if (page(); as p) {
+  <section class="section section--static page-main">
+    <article class="content-page">
+      <p class="eyebrow">{{ p.eyebrow | t }}</p>
+      <h1 class="content-page__title">{{ p.title | t }}</h1>
+      @for (key of p.blocks; track key) {
+        <p class="content-page__p">{{ key | t }}</p>
+      }
+    </article>
+  </section>
+}

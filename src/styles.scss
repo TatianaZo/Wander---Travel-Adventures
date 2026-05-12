@@ -1,0 +1,54 @@
+@use './app/landing-content.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: clamp(15px, 0.35vw + 14px, 17px);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+:root {
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --surface: #d4d4d4;
+  --surface-card: #ffffff;
+  --primary: #0c4a6e;
+  --primary-light: #0369a1;
+  --accent: #ea580c;
+  --accent-soft: #ffedd5;
+  --ring: rgba(12, 74, 110, 0.25);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input,
+textarea,
+select,
+option {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+button {
+  font-family: inherit;
+}

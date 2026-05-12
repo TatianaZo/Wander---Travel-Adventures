@@ -1,0 +1,27 @@
+<section class="section section--destinations page-main">
+  <div class="section__head">
+    <p class="eyebrow">{{ 'sec.dest.eyebrow' | t }}</p>
+    <h2 class="section__title">{{ 'sec.dest.title' | t }}</h2>
+    <p class="section__subtitle">{{ 'sec.dest.subtitle' | t }}</p>
+  </div>
+
+  <div class="grid grid--destinations">
+    @for (d of destinations; track d.id) {
+      <article class="card card--destination">
+        <div class="card__image">
+          <img [src]="d.image" [attr.alt]="d.titleKey | t" width="800" height="520" loading="lazy" />
+          <span class="pill pill--on-image">{{ i18n.tDifficulty(d.difficultyMin, d.difficultyMax) }}</span>
+        </div>
+        <div class="card__body">
+          <div class="card__row">
+            <h3 class="card__title">{{ d.titleKey | t }}</h3>
+            <span class="card__meta">{{ d.durationKey | t }}</span>
+          </div>
+          <div class="card__footer">
+            <span class="muted">{{ d.detailsKey | t }}</span>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</section>

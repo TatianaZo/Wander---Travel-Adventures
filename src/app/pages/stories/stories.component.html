@@ -1,0 +1,75 @@
+<section class="section section--stories page-main">
+  <div class="stories">
+    <div class="stories__visual">
+      <div class="stories__slide-stack">
+        @for (id of testimonialIds; track id; let i = $index) {
+          <img
+            class="stories__slide-img"
+            [class.stories__slide-img--active]="testimonialIndex === i"
+            [src]="slideImages[id]"
+            [attr.alt]="'stories.imgAlt' | t"
+            width="900"
+            height="1125"
+            [attr.fetchpriority]="i === 0 ? 'high' : null"
+            loading="lazy"
+          />
+        }
+      </div>
+      <div class="stories__quote-card">
+        <p>“{{ 'stories.cardLine1' | t }}”</p>
+        <span>{{ 'stories.cardLine2' | t }}</span>
+      </div>
+    </div>
+    <div class="stories__content">
+      <p class="eyebrow">{{ 'stories.eyebrow' | t }}</p>
+      <h2 class="section__title">{{ 'stories.title' | t }}</h2>
+      <p class="stories__hint">{{ 'stories.carouselHint' | t }}</p>
+      <div class="testimonial-carousel">
+        <button
+          type="button"
+          class="carousel-btn carousel-btn--prev"
+          (click)="prevTestimonial()"
+          [attr.aria-label]="'stories.carouselPrev' | t"
+        >
+          ‹
+        </button>
+        <div class="testimonial-carousel__quotes" [style.--story-crossfade-ms]="crossfadeMs + 'ms'">
+          @for (id of testimonialIds; track id; let i = $index) {
+            <blockquote
+              class="quote quote--carousel quote-slide"
+              [class.quote-slide--active]="testimonialIndex === i"
+            >
+              <p>“{{ ('test.' + id + '.quote') | t }}”</p>
+              <footer>
+                <strong>{{ ('test.' + id + '.author') | t }}</strong>
+                <span>{{ ('test.' + id + '.role') | t }}</span>
+              </footer>
+            </blockquote>
+          }
+        </div>
+        <button
+          type="button"
+          class="carousel-btn carousel-btn--next"
+          (click)="nextTestimonial()"
+          [attr.aria-label]="'stories.carouselNext' | t"
+        >
+          ›
+        </button>
+      </div>
+      <div class="carousel-dots" role="tablist" [attr.aria-label]="'stories.carouselDots' | t">
+        @for (id of testimonialIds; track id; let i = $index) {
+          <button
+            type="button"
+            class="carousel-dot"
+            [class.is-active]="testimonialIndex === i"
+            (click)="goTestimonial(i)"
+            [attr.aria-label]="carouselDotLabel(i)"
+            [attr.aria-selected]="testimonialIndex === i"
+            role="tab"
+          ></button>
+        }
+      </div>
+      <a class="btn btn--primary" routerLink="/destinations">{{ 'stories.cta' | t }}</a>
+    </div>
+  </div>
+</section>

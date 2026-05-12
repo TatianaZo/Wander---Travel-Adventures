@@ -1,0 +1,128 @@
+<div class="page">
+  <header
+    class="site-header"
+    [class.site-header--open]="menuOpen"
+    [class.site-header--on-light]="isLightBackground()"
+  >
+    <div class="site-header__bar">
+      <div class="glass-pill">
+        <a class="pill-logo" routerLink="/" (click)="closeMenu()">
+          <img src="assets/logo-symbol.png" width="40" height="40" alt="" />
+        </a>
+
+        <nav class="pill-nav pill-nav--desktop" aria-label="Primary">
+          @for (link of navLinks; track link.path) {
+            <a
+              class="pill-nav__link"
+              [routerLink]="link.path"
+              routerLinkActive="is-active"
+              [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+              (click)="closeMenu()"
+              >{{ link.labelKey | t }}</a
+            >
+          }
+        </nav>
+
+        <button
+          type="button"
+          class="pill-nav-toggle"
+          [attr.aria-expanded]="menuOpen"
+          aria-controls="site-nav"
+          (click)="toggleMenu()"
+        >
+          <span class="pill-nav-toggle__bar"></span>
+          <span class="pill-nav-toggle__bar"></span>
+          <span class="pill-nav-toggle__bar"></span>
+          <span class="visually-hidden">{{ 'a11y.toggleMenu' | t }}</span>
+        </button>
+
+        <div class="pill-tools">
+          <label class="lang-wrap lang-wrap--pill">
+            <span class="visually-hidden">{{ 'lang.selectAria' | t }}</span>
+            <select
+              class="lang-select lang-select--pill"
+              name="lang"
+              [ngModel]="i18n.language()"
+              (ngModelChange)="i18n.setLanguage($event)"
+            >
+              @for (opt of i18n.languages; track opt.code) {
+                <option [ngValue]="opt.code">{{ opt.code }}</option>
+              }
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <nav id="site-nav" class="nav-mobile" [class.nav-mobile--open]="menuOpen" aria-label="Mobile">
+      @for (link of navLinks; track link.path) {
+        <a
+          class="nav-mobile__link"
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          (click)="closeMenu()"
+          >{{ link.labelKey | t }}</a
+        >
+      }
+    </nav>
+  </header>
+
+  <main class="page__main">
+    <router-outlet />
+  </main>
+
+  <section class="cta-band">
+    <div class="cta-band__inner">
+      <div>
+        <h2>{{ 'cta.title' | t }}</h2>
+        <p>{{ 'cta.text' | t }}</p>
+      </div>
+      <a class="btn btn--light" routerLink="/rates">{{ 'cta.btn' | t }}</a>
+    </div>
+  </section>
+
+  <section class="demo-disclosure" role="note">
+    <div class="demo-disclosure__inner">
+      <p class="demo-disclosure__text">{{ 'footer.demo' | t }}</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div class="footer__col footer__col--brand">
+        <a class="logo logo--footer logo--footer-brand" routerLink="/">
+          <img class="logo--footer__img" src="assets/logo-symbol.png" width="40" height="40" alt="" />
+          <span class="logo__text">Wander</span>
+        </a>
+        <p class="footer__about">{{ 'footer.about' | t }}</p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">{{ 'footer.colSite' | t }}</h4>
+        <a routerLink="/destinations">{{ 'footer.linkDest' | t }}</a>
+        <a routerLink="/experiences">{{ 'footer.linkExp' | t }}</a>
+        <a routerLink="/stories">{{ 'footer.linkStories' | t }}</a>
+        <a routerLink="/rates">{{ 'footer.linkRates' | t }}</a>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">{{ 'footer.company' | t }}</h4>
+        <a routerLink="/about">{{ 'footer.aboutCo' | t }}</a>
+        <a routerLink="/careers">{{ 'footer.careers' | t }}</a>
+        <a routerLink="/press">{{ 'footer.press' | t }}</a>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">{{ 'footer.colLegal' | t }}</h4>
+        <a routerLink="/cookies">{{ 'footer.linkCookies' | t }}</a>
+        <a routerLink="/privacy">{{ 'footer.linkPrivacy' | t }}</a>
+        <a routerLink="/terms">{{ 'footer.linkTerms' | t }}</a>
+        <h4 class="footer__heading footer__heading--spaced">{{ 'footer.newsletter' | t }}</h4>
+        <p class="footer__hint">{{ 'footer.hint' | t }}</p>
+        <form class="footer__form" (submit)="$event.preventDefault()">
+          <input type="email" [placeholder]="'footer.emailPh' | t" [attr.aria-label]="'footer.emailPh' | t" />
+          <button type="submit" class="btn btn--primary">{{ 'footer.join' | t }}</button>
+        </form>
+      </div>
+    </div>
+    <p class="footer__legal">{{ 'footer.legal' | t }}</p>
+  </footer>
+</div>

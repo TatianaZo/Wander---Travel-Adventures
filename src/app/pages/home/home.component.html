@@ -1,0 +1,174 @@
+<section class="hero hero--immersive hero--fullbleed">
+  <div class="hero__media">
+    <img
+      src="assets/hero-main.png"
+      [attr.alt]="'a11y.heroImg' | t"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+    />
+    <div class="hero__veil"></div>
+    <div class="hero__sparkles" aria-hidden="true">
+      @for (n of heroSparkleSlots; track n) {
+        <span class="hero__sparkle"></span>
+      }
+    </div>
+  </div>
+  <div class="hero__content">
+    <p class="eyebrow">{{ 'hero.eyebrow' | t }}</p>
+    <h1 class="hero__title">
+      {{ 'hero.titleBefore' | t }}
+      <em>{{ 'hero.titleEm' | t }}</em>
+      {{ 'hero.titleAfter' | t }}
+    </h1>
+    <p class="hero__lead">{{ 'hero.lead' | t }}</p>
+
+    <form class="search" (ngSubmit)="pickTrip()">
+      <label class="search__field">
+        <span class="search__label">{{ 'home.filter.format' | t }}</span>
+        <select class="search__select" name="format" [(ngModel)]="filterFormat">
+          <option value="all">{{ 'home.opt.fmt.all' | t }}</option>
+          <option value="horse">{{ 'home.opt.fmt.horse' | t }}</option>
+          <option value="car">{{ 'home.opt.fmt.car' | t }}</option>
+          <option value="individual">{{ 'home.opt.fmt.individual' | t }}</option>
+          <option value="group">{{ 'home.opt.fmt.group' | t }}</option>
+        </select>
+      </label>
+      <label class="search__field">
+        <span class="search__label">{{ 'home.filter.duration' | t }}</span>
+        <select class="search__select" name="duration" [(ngModel)]="filterDuration">
+          <option value="all">{{ 'home.opt.dur.all' | t }}</option>
+          <option value="weekend">{{ 'home.opt.dur.weekend' | t }}</option>
+          <option value="week">{{ 'home.opt.dur.week' | t }}</option>
+          <option value="two_weeks">{{ 'home.opt.dur.two_weeks' | t }}</option>
+        </select>
+      </label>
+      <label class="search__field">
+        <span class="search__label">{{ 'home.filter.difficulty' | t }}</span>
+        <select class="search__select" name="difficulty" [(ngModel)]="filterDifficulty">
+          <option value="all">{{ 'home.opt.diff.all' | t }}</option>
+          <option value="1">{{ 'home.opt.diff.1' | t }}</option>
+          <option value="2">{{ 'home.opt.diff.2' | t }}</option>
+          <option value="3">{{ 'home.opt.diff.3' | t }}</option>
+          <option value="4">{{ 'home.opt.diff.4' | t }}</option>
+          <option value="5">{{ 'home.opt.diff.5' | t }}</option>
+        </select>
+      </label>
+      <button type="submit" class="btn btn--primary search__submit">{{ 'home.filter.submit' | t }}</button>
+    </form>
+
+    <div class="hero__stats">
+      <div>
+        <strong>18k+</strong>
+        <span>{{ 'stat.travelers' | t }}</span>
+      </div>
+      <div>
+        <strong>4.9</strong>
+        <span>{{ 'stat.rating' | t }}</span>
+      </div>
+      <div>
+        <strong>72</strong>
+        <span>{{ 'stat.cities' | t }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--destinations home-spotlight">
+  <div class="section__head">
+    <p class="eyebrow">{{ 'home.spotlight.eyebrow' | t }}</p>
+    <h2 class="section__title">{{ 'home.spotlight.title' | t }}</h2>
+    <p class="section__subtitle">{{ 'home.spotlight.subtitle' | t }}</p>
+  </div>
+  <div class="grid grid--hikes home-spotlight__grid">
+    @for (trip of spotlightTrips; track trip.id) {
+      <article class="hike-card">
+        <div class="hike-card__image">
+          <img [src]="trip.image" [attr.alt]="trip.titleKey | t" width="640" height="400" loading="lazy" />
+        </div>
+        <div class="hike-card__body">
+          <p class="hike-card__meta">{{ tripMetaLine(trip) }}</p>
+          <h3 class="hike-card__title">{{ trip.titleKey | t }}</h3>
+          <p class="hike-card__teaser">{{ trip.teaserKey | t }}</p>
+          <a class="btn btn--outline hike-card__btn" routerLink="/rates">{{ 'pkg.cta.trial' | t }}</a>
+        </div>
+      </article>
+    }
+  </div>
+  <p class="home-spotlight__footer">
+    <a routerLink="/destinations" class="link-arrow">{{ 'home.spotlight.linkAll' | t }}</a>
+  </p>
+</section>
+
+<section class="section home-bento">
+  <div class="section__head">
+    <p class="eyebrow">{{ 'home.bento.eyebrow' | t }}</p>
+    <h2 class="section__title">{{ 'home.bento.title' | t }}</h2>
+  </div>
+  <div class="home-bento__grid">
+    <div class="home-bento__cell home-bento__cell--tall">
+      <img src="assets/trip-chatgpt-3.png" [attr.alt]="'home.bento.a.alt' | t" width="800" height="1100" loading="lazy" />
+      <span class="home-bento__cap">{{ 'home.bento.a.caption' | t }}</span>
+    </div>
+    <div class="home-bento__cell">
+      <img src="assets/trip-camp.png" [attr.alt]="'home.bento.b.alt' | t" width="800" height="520" loading="lazy" />
+      <span class="home-bento__cap">{{ 'home.bento.b.caption' | t }}</span>
+    </div>
+    <div class="home-bento__cell">
+      <img src="assets/trip-stars.png" [attr.alt]="'home.bento.c.alt' | t" width="800" height="520" loading="lazy" />
+      <span class="home-bento__cap">{{ 'home.bento.c.caption' | t }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section home-explore">
+  <div class="home-explore__grid">
+    <a class="home-explore-card" routerLink="/destinations">
+      <span class="home-explore-card__icon" aria-hidden="true">{{ 'home.explore.formats.icon' | t }}</span>
+      <h3 class="home-explore-card__title">{{ 'home.explore.formats.title' | t }}</h3>
+      <p class="home-explore-card__text">{{ 'home.explore.formats.text' | t }}</p>
+      <span class="home-explore-card__cta">{{ 'home.explore.formats.cta' | t }} →</span>
+    </a>
+    <a class="home-explore-card" routerLink="/experiences">
+      <span class="home-explore-card__icon" aria-hidden="true">{{ 'home.explore.whats.icon' | t }}</span>
+      <h3 class="home-explore-card__title">{{ 'home.explore.whats.title' | t }}</h3>
+      <p class="home-explore-card__text">{{ 'home.explore.whats.text' | t }}</p>
+      <span class="home-explore-card__cta">{{ 'home.explore.whats.cta' | t }} →</span>
+    </a>
+    <a class="home-explore-card" routerLink="/stories">
+      <span class="home-explore-card__icon" aria-hidden="true">{{ 'home.explore.stories.icon' | t }}</span>
+      <h3 class="home-explore-card__title">{{ 'home.explore.stories.title' | t }}</h3>
+      <p class="home-explore-card__text">{{ 'home.explore.stories.text' | t }}</p>
+      <span class="home-explore-card__cta">{{ 'home.explore.stories.cta' | t }} →</span>
+    </a>
+  </div>
+</section>
+
+@if (hikesVisible()) {
+  <section class="section section--active-hikes" id="active-hikes">
+    <div class="section__head">
+      <p class="eyebrow">{{ 'home.matched.eyebrow' | t }}</p>
+      <h2 class="section__title">{{ 'home.matched.title' | t }}</h2>
+      <p class="section__subtitle">{{ 'home.matched.subtitle' | t }}</p>
+    </div>
+    @if (filteredActiveTrips.length === 0) {
+      <p class="hikes-empty">{{ 'home.matched.empty' | t }}</p>
+    } @else {
+      <div class="grid grid--hikes">
+        @for (trip of filteredActiveTrips; track trip.id) {
+          <article class="hike-card">
+            <div class="hike-card__image">
+              <img [src]="trip.image" [attr.alt]="trip.titleKey | t" width="640" height="400" loading="lazy" />
+            </div>
+            <div class="hike-card__body">
+              <p class="hike-card__meta">{{ tripMetaLine(trip) }}</p>
+              <h3 class="hike-card__title">{{ trip.titleKey | t }}</h3>
+              <p class="hike-card__teaser">{{ trip.teaserKey | t }}</p>
+              <a class="btn btn--outline hike-card__btn" routerLink="/rates">{{ 'home.matched.ctaRates' | t }}</a>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </section>
+}

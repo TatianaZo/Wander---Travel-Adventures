@@ -1,0 +1,24 @@
+<div id="rates" class="grid grid--packages">
+  @for (p of packages; track p.id) {
+    <article class="plan" [class.plan--featured]="p.featured">
+      <div class="plan__top">
+        <h3 class="plan__name">{{ ('pkg.' + p.id + '.name') | t }}</h3>
+        @if (p.featured) {
+          <span class="plan__badge">{{ 'pkg.badge' | t }}</span>
+        }
+      </div>
+      <p class="plan__price">
+        <span class="plan__amount">{{ ('pkg.' + p.id + '.price') | t }}</span>
+        <span class="plan__period">{{ ('pkg.' + p.id + '.period') | t }}</span>
+      </p>
+      <ul class="plan__list">
+        @for (n of perkIndexes; track n) {
+          <li>{{ ('pkg.' + p.id + '.p' + n) | t }}</li>
+        }
+      </ul>
+      <button type="button" class="btn" [class.btn--primary]="p.featured" [class.btn--outline]="!p.featured">
+        {{ p.id === 'odyssey' ? ('pkg.cta.contact' | t) : ('pkg.cta.trial' | t) }}
+      </button>
+    </article>
+  }
+</div>
